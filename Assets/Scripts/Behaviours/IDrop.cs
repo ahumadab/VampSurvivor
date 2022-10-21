@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IDrop
+namespace Assets.Scripts.Behaviours
 {
-    public void Drop();
+    public interface IDrop
+    {
+        public void Drop();
+    }
 }

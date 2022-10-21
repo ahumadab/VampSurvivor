@@ -1,26 +1,28 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropOnDestroy : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] List<GameObject> dropItemPrefabs;
-    [SerializeField][Range(0f, 1f)] float chanceOfDrop = 1f;
-
-    bool isQuitting = false;
-    private void OnApplicationQuit()
+    public class DropOnDestroy : MonoBehaviour
     {
-        isQuitting = true;
-    }
+        [SerializeField] List<GameObject> dropItemPrefabs;
+        [SerializeField][Range(0f, 1f)] float chanceOfDrop = 1f;
 
-    private void OnDestroy()
-    {
-        if (isQuitting) { return; }
-        if (Random.value < chanceOfDrop)
+        bool isQuitting = false;
+        private void OnApplicationQuit()
         {
-            int randomIndex = Random.Range(0, dropItemPrefabs.Count);
-            GameObject randomObjectToDrop = Instantiate(dropItemPrefabs[randomIndex]);
-            randomObjectToDrop.transform.position = transform.position;
+            isQuitting = true;
+        }
+
+        private void OnDestroy()
+        {
+            if (isQuitting) { return; }
+            if (Random.value < chanceOfDrop)
+            {
+                int randomIndex = Random.Range(0, dropItemPrefabs.Count);
+                GameObject randomObjectToDrop = Instantiate(dropItemPrefabs[randomIndex]);
+                randomObjectToDrop.transform.position = transform.position;
+            }
         }
     }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface DyingBehaviour
+namespace Assets.Scripts.Behaviours
 {
-    public void Die();
+    public interface DyingBehaviour
+    {
+        public void Die();
+    }
 }

@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Item : ScriptableObject
+namespace Assets.Scripts.Items
 {
-    public string Name;
-    public int armor;
-
-    public void Equip(Character character)
+    [CreateAssetMenu]
+    public class Item : ScriptableObject
     {
-        character.armor += armor;
-    }
+        public string Name;
+        public int armor;
 
-    public void UnEquip(Character character)
-    {
-        character.armor -= armor;
+        public void Equip(Character character)
+        {
+            character.armor += armor;
+        }
+
+        public void UnEquip(Character character)
+        {
+            character.armor -= armor;
+        }
     }
 }

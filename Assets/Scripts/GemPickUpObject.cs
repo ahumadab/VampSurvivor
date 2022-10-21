@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Behaviours;
 using UnityEngine;
 
-public class GemPickUpObject : MonoBehaviour, IPickUpObject
+namespace Assets.Scripts
 {
-    [SerializeField] int xpAmount;
-    public void OnPickUp(Character character)
+    public class GemPickUpObject : MonoBehaviour, IPickUpObject
     {
-        character.level.AddExperience(xpAmount);
+        [SerializeField] int xpAmount;
+        public void OnPickUp(Character character)
+        {
+            character.level.AddExperience(xpAmount);
+        }
     }
 }

@@ -1,58 +1,67 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+namespace Assets.Scripts
 {
-    public int armor = 0;
-    public int maxHp = 1000;
-    public int currentHp = 1000;
-
-    [SerializeField] StatusBar hpBar;
-    [HideInInspector] public Level level;
-    [HideInInspector] public Coins coins;
-
-    private void Awake()
+    public class Character : MonoBehaviour
     {
-        level = GetComponent<Level>();
-        coins = GetComponent<Coins>();
-    }
+        public int armor = 0;
+        public int maxHp = 1000;
+        public int currentHp = 1000;
 
-    private void Start()
-    {
-        hpBar.SetState(currentHp, maxHp);
-    }
+        [SerializeField] StatusBar hpBar;
+        [HideInInspector] public Level level;
+        [HideInInspector] public Coins coins;
 
-    public void TakeDamage(int damage)
-    {
-        ApplyArmor(ref damage);
-        currentHp -= damage;
-
-        if (currentHp <= 0)
+        private void Awake()
         {
-            Debug.Log("Character is dead GAME OVER");
+            level = GetComponent<Level>();
+            coins = GetComponent<Coins>();
         }
-        hpBar.SetState(currentHp, maxHp);
-    }
 
-    private void ApplyArmor(ref int damage)
-    {
-        damage -= armor;
-        if (damage < 0)
+        private void Start()
         {
-            damage = 0;
+            hpBar.SetState(currentHp, maxHp);
         }
-    }
 
-    public void Heal(int amount)
-    {
-        if (currentHp <= 0) { return; }
-        currentHp += amount;
-        if (currentHp > maxHp)
+        public void TakeDamage(int damage)
         {
-            currentHp = maxHp;
+            if (IsDead())
+            {
+                return;
+            }
+            ApplyArmor(ref damage);
+            currentHp -= damage;
+
+            if (IsDead())
+            {
+                GetComponent<CharacterGameOver>().GameOver();
+            }
+            hpBar.SetState(currentHp, maxHp);
         }
-        hpBar.SetState(currentHp, maxHp);
+
+        public bool IsDead()
+        {
+            return currentHp <= 0;
+        }
+
+        private void ApplyArmor(ref int damage)
+        {
+            damage -= armor;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+        }
+
+        public void Heal(int amount)
+        {
+            if (IsDead()) { return; }
+            currentHp += amount;
+            if (currentHp > maxHp)
+            {
+                currentHp = maxHp;
+            }
+            hpBar.SetState(currentHp, maxHp);
+        }
     }
 }

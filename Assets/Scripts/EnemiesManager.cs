@@ -1,44 +1,45 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Helpers;
 using UnityEngine;
 
-public class EnemiesManager : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] GameObject enemy;
-    [SerializeField] Vector2 spawnArea;
-    [SerializeField] float spawnTimer;
-    [SerializeField] GameObject player;
-    RandomPosition positionGenerator;
-    float timer;
-
-    private void Awake()
+    public class EnemiesManager : MonoBehaviour
     {
-        positionGenerator = new RandomPosition();
-    }
-    private void Update()
-    {
-        SpawnEnemyWithDelay();
-    }
+        [SerializeField] GameObject enemy;
+        [SerializeField] Vector2 spawnArea;
+        [SerializeField] float spawnTimer;
+        [SerializeField] GameObject player;
+        RandomPosition positionGenerator;
+        float timer;
 
-    private void SpawnEnemy()
-    {
-        Vector3 randomPosition = positionGenerator
-            .GenerateRandomPositionOutsideFOVFromOrigin(spawnArea, player.transform.position);
-
-        GameObject newEnemy = Instantiate(enemy);
-        newEnemy.transform.position = randomPosition;
-        newEnemy.GetComponent<Enemy>().SetTarget(player);
-        newEnemy.transform.parent = transform;
-    }
-
-    private void SpawnEnemyWithDelay()
-    {
-        timer -= Time.deltaTime;
-        if (timer < 0f)
+        private void Awake()
         {
-            SpawnEnemy();
-            timer = spawnTimer;
+            positionGenerator = new RandomPosition();
+        }
+        private void Update()
+        {
+            SpawnEnemyWithDelay();
+        }
+
+        private void SpawnEnemy()
+        {
+            Vector3 randomPosition = positionGenerator
+                .GenerateRandomPositionOutsideFOVFromOrigin(spawnArea, player.transform.position);
+
+            GameObject newEnemy = Instantiate(enemy);
+            newEnemy.transform.position = randomPosition;
+            newEnemy.GetComponent<Enemy>().SetTarget(player);
+            newEnemy.transform.parent = transform;
+        }
+
+        private void SpawnEnemyWithDelay()
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0f)
+            {
+                SpawnEnemy();
+                timer = spawnTimer;
+            }
         }
     }
 }

@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Behaviours;
 using UnityEngine;
 
-public class DestructableObject : MonoBehaviour, IDamageable
+namespace Assets.Scripts
 {
-    public void TakeDamage(int damageAmount)
+    public class DestructableObject : MonoBehaviour, IDamageable
     {
-        Destroy(gameObject);
+        public void TakeDamage(int damageAmount)
+        {
+            Destroy(gameObject);
+        }
     }
 }

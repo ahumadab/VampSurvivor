@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusBar : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] Transform bar;
-
-    public void SetState(int current, int max)
+    public class StatusBar : MonoBehaviour
     {
-        float state = (float)current;
-        state/=max;
-        if (state < 0f)
+        [SerializeField] Transform bar;
+
+        public void SetState(int current, int max)
         {
-            state = 0f;
+            float state = (float)current;
+            state/=max;
+            if (state < 0f)
+            {
+                state = 0f;
+            }
+            bar.transform.localScale = new Vector3(state, 1f, 1f);
         }
-        bar.transform.localScale = new Vector3(state, 1f, 1f);
     }
 }
