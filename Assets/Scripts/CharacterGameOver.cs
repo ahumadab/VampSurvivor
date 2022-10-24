@@ -4,8 +4,9 @@ namespace Assets.Scripts
 {
     public class CharacterGameOver : MonoBehaviour
     {
-
+        [SerializeField] private GameObject _weapons;
         public GameObject gameOverPanel;
+
 
 
         public void GameOver()
@@ -13,6 +14,7 @@ namespace Assets.Scripts
             Debug.Log("GameOver");
             GetComponent<PlayerMove>().enabled = false; 
             gameOverPanel.SetActive(true);
+            _weapons.SetActive(false);
         }
     }
 }

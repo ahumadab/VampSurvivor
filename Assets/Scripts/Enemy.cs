@@ -55,6 +55,7 @@ namespace Assets.Scripts
         
             if (hp < 1)
             {
+                GetComponent<DropOnDestroy>().CheckDrop();
                 Destroy(gameObject);
             }
         }

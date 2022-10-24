@@ -8,6 +8,7 @@ namespace Assets.Scripts
         public void TakeDamage(int damageAmount)
         {
             Destroy(gameObject);
+            GetComponent<DropOnDestroy>().CheckDrop();
         }
     }
 }

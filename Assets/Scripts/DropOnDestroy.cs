@@ -5,24 +5,28 @@ namespace Assets.Scripts
 {
     public class DropOnDestroy : MonoBehaviour
     {
-        [SerializeField] List<GameObject> dropItemPrefabs;
-        [SerializeField][Range(0f, 1f)] float chanceOfDrop = 1f;
+        [SerializeField] private List<GameObject> _dropItemPrefabs;
+        [SerializeField][Range(0f, 1f)] private float _chanceOfDrop = 1f;
 
-        bool isQuitting = false;
+        bool _isQuitting = false;
         private void OnApplicationQuit()
         {
-            isQuitting = true;
+            _isQuitting = true;
         }
 
-        private void OnDestroy()
+        public void CheckDrop()
         {
-            if (isQuitting) { return; }
-            if (Random.value < chanceOfDrop)
-            {
-                int randomIndex = Random.Range(0, dropItemPrefabs.Count);
-                GameObject randomObjectToDrop = Instantiate(dropItemPrefabs[randomIndex]);
-                randomObjectToDrop.transform.position = transform.position;
-            }
+            if (_isQuitting) return; 
+            if (!IsDropping()) return;
+
+            int randomIndex = Random.Range(0, _dropItemPrefabs.Count);
+            GameObject randomObjectToDrop = Instantiate(_dropItemPrefabs[randomIndex]);
+            randomObjectToDrop.transform.position = transform.position;
+        }
+
+        private bool IsDropping()
+        {
+            return Random.value < _chanceOfDrop;
         }
     }
 }

@@ -184,6 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d5861f1fe1e9141b1ebeb128c20ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItemPrefabs:
+  _dropItemPrefabs:
   - {fileID: 3759057803886255584, guid: 5a299529c39ec4144b83cbe69ae79713, type: 3}
-  chanceOfDrop: 1
+  _chanceOfDrop: 1
