@@ -1,39 +1,50 @@
+using Assets.Scripts.LevelUpMenu;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class Level : MonoBehaviour
     {
-        int level = 1;
-        int experience = 0;
-        [SerializeField] ExperienceBar experienceBar;
-    
-        int TO_LEVEL_UP
-        {
-            get { return level * 1000; }
-        }
+        [SerializeField] ExperienceBar _experienceBar;
+        [SerializeField] LevelUpPanelManager _levelUpPanelManager;
+        private int _level = 1;
+        private int _experience = 0;
+        
+
+        private int ToLevelUp() => _level * 1000;
 
         private void Start()
         {
-            experienceBar.UpdateExperienceSlider(experience, TO_LEVEL_UP);
-            experienceBar.SetLevelText(level);
+            _experienceBar.UpdateExperienceSlider(_experience, ToLevelUp());
+            _experienceBar.SetLevelText(_level);
         }
 
         public void AddExperience(int amount)
         {
-            experience += amount;
+            _experience += amount;
             CheckLevelUp();
-            experienceBar.UpdateExperienceSlider(experience, TO_LEVEL_UP);
+            _experienceBar.UpdateExperienceSlider(_experience, ToLevelUp());
         }
 
         public void CheckLevelUp()
         {
-            if (experience >= TO_LEVEL_UP)
+            if (HasToLevelUp())
             {
-                experience -= TO_LEVEL_UP;
-                level += 1;
-                experienceBar.SetLevelText(level);
+                LevelUp();
             }
+        }
+
+        private bool HasToLevelUp()
+        {
+            return _experience >= ToLevelUp();
+        }
+
+        private void LevelUp()
+        {
+            _levelUpPanelManager.OpenPanel();
+            _experience -= ToLevelUp();
+            _level += 1;
+            _experienceBar.SetLevelText(_level);
         }
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.MainMenu
+namespace Assets.Scripts.IngameMenu
 {
     public class PauseManager : MonoBehaviour
     {

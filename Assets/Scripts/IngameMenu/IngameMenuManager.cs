@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.MainMenu
+namespace Assets.Scripts.IngameMenu
 {
-    public class MainMenuManager : MonoBehaviour
+    public class IngameMenuManager : MonoBehaviour
     {
         [SerializeField] private GameObject _panel;
         [SerializeField] private PauseManager _pauseManager;
