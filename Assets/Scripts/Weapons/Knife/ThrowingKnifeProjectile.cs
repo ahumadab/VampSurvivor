@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.Weapons.Knife
 {
     public class ThrowingKnifeProjectile : MonoBehaviour
     {
