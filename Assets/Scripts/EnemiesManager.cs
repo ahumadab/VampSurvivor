@@ -1,3 +1,4 @@
+using Assets.Scripts.Game;
 using Assets.Scripts.Helpers;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Assets.Scripts
         [SerializeField] GameObject enemy;
         [SerializeField] Vector2 spawnArea;
         [SerializeField] float spawnTimer;
-        [SerializeField] GameObject player;
+        GameObject player;
         RandomPosition positionGenerator;
         float timer;
 
@@ -16,6 +17,12 @@ namespace Assets.Scripts
         {
             positionGenerator = new RandomPosition();
         }
+
+        private void Start()
+        {
+            player = GameManager.instance.playerTransform.gameObject;
+        }
+
         private void Update()
         {
             SpawnEnemyWithDelay();

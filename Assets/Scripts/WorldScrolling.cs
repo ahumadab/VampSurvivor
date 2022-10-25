@@ -1,10 +1,11 @@
+using Assets.Scripts.Game;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class WorldScrolling : MonoBehaviour
     {
-        [SerializeField] Transform playerTransform;
+        Transform playerTransform;
         Vector2Int currentTilePosition = new Vector2Int(0,0);
         [SerializeField] Vector2Int playerTilePosition;
         Vector2Int onTileGridPlayerPosition;
@@ -24,6 +25,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
+            playerTransform = GameManager.instance.playerTransform;
             UpdateOnTilesOnScreen();
         }
 
