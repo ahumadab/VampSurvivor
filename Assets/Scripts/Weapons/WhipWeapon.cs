@@ -20,10 +20,9 @@ namespace Assets.Scripts.Weapons
         {
             foreach (var collider2D1 in colliders)
             {
-                if (collider2D1.TryGetComponent<IDamageable>(out var target))
-                {
-                    target.TakeDamage(weaponStats.damage);
-                }
+                if (!collider2D1.TryGetComponent<IDamageable>(out var target)) continue;
+                PostDamage(weaponStats.damage, collider2D1.transform.position);
+                target.TakeDamage(weaponStats.damage);
             }
         }
 

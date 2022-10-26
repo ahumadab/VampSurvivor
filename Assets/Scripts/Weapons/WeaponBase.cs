@@ -1,3 +1,4 @@
+using Assets.Scripts.MessageSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -41,6 +42,11 @@ namespace Assets.Scripts.Weapons
         }
 
         public abstract void Attack();
+
+        public virtual void PostDamage(int damage, Vector3 targetPosition)
+        {
+            MessageSystemManager.instance.PostMessage(damage.ToString(), targetPosition);
+        }
 
     }
 
