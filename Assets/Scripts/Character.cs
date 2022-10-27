@@ -39,7 +39,7 @@ namespace Assets.Scripts
             hpBar.SetState(currentHp, maxHp);
         }
 
-        public bool IsDead()
+        private bool IsDead()
         {
             return currentHp <= 0;
         }

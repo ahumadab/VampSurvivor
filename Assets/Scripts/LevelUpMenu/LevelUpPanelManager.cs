@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using Assets.Scripts.Game;
 using Assets.Scripts.IngameMenu;
+using Assets.Scripts.Upgrade;
 using UnityEngine;
 
 namespace Assets.Scripts.LevelUpMenu
@@ -7,34 +10,66 @@ namespace Assets.Scripts.LevelUpMenu
     {
         [SerializeField] private GameObject _levelUpPanel;
         [SerializeField] private PauseManager _pauseManager;
+        [SerializeField] private List<UpgradeButton> _upgradeButtons;
 
-        public void OpenPanel()
+        private void Start()
         {
-            _pauseManager.PauseGame();
-            _levelUpPanel.SetActive(true);
+            HideButtons();
         }
 
-        public void ClosePanel()
+        public void OpenPanel(List<PowerUp> upgradeDataList)
         {
+            Clean();
+            _pauseManager.PauseGame();
+            _levelUpPanel.SetActive(true);
+            SetDataToButtons(upgradeDataList);
+        }
+
+        public void Upgrade(int pressedButtonIdD)
+        {
+            if (GameManager.instance.playerTransform.TryGetComponent<Level>(out var levelComponent))
+            {
+                levelComponent.Upgrade(pressedButtonIdD);
+            }
+
+            ClosePanel();
+        }
+
+        public void Clean()
+        {
+            foreach (var upgradeButton in _upgradeButtons)
+            {
+                upgradeButton.Clean();
+            }
+        }
+
+        private void ClosePanel()
+        {
+            HideButtons();
             _pauseManager.UnpauseGame();
             _levelUpPanel.SetActive(false);
         }
 
-        private bool IsOpen()
+        private void HideButtons()
         {
-            return _levelUpPanel.activeInHierarchy;
+            foreach (var upgradeButton in _upgradeButtons)
+            {
+                upgradeButton.gameObject.SetActive(false);
+            }
         }
 
-        private void CheckToOpenMenu()
+        private void SetDataToButtons(IReadOnlyList<PowerUp> upgradeDataList)
         {
-            if (IsOpen() && Input.GetKeyDown(KeyCode.Escape))
+            for (int i = 0; i < upgradeDataList.Count; i++)
             {
-                ClosePanel();
-            }
-            else if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                OpenPanel();
+                UpgradeButton upgradeButton = _upgradeButtons[i];
+                PowerUp upgradeData = upgradeDataList[i];
+                upgradeButton.gameObject.SetActive(true);
+                upgradeButton.Set(upgradeData);
             }
         }
+
+
+
     }
 }

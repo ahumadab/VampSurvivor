@@ -9,17 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b32a9b393cb1dc498aafa8af69b006d, type: 3}
-  m_Name: ThrowingKnife
+  m_Script: {fileID: 11500000, guid: 35e1ffca6c270914d8def6543053f6a8, type: 3}
+  m_Name: Whip (Double Slash) Upgrade
   m_EditorClassIdentifier: 
-  Name: Throwing Knife
-  level: 1
-  stats:
+  upgradeType: 0
+  Name: Double Slash
+  icon: {fileID: 21300000, guid: 4a0c4df2072da3a48a9041617cc2f2b2, type: 3}
+  weaponUpgradeStats:
     damage: 100
-    timeToAttack: 2
+    timeToAttack: 0
     piercingPower: 0
-  weaponBasePrefab: {fileID: 1886421922201683051, guid: f9d9170b7bd1750488254cde1dba46f2, type: 3}
-  upgrades:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

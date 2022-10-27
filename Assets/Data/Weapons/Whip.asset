@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Whip
   m_EditorClassIdentifier: 
   Name: Whip
+  level: 1
   stats:
     damage: 100
-    timeToAttack: 3
+    timeToAttack: 1
+    piercingPower: 0
   weaponBasePrefab: {fileID: 7750774096482451545, guid: da4406d67438c6b4bbde04b4f24aeba3, type: 3}
+  upgrades:
+  - {fileID: 11400000, guid: 17237da592b396547a66e1b3896bb026, type: 2}
+  - {fileID: 11400000, guid: 089b086dc10786140b26c259cc69b5f2, type: 2}

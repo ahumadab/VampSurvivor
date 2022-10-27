@@ -1,4 +1,5 @@
 using Assets.Scripts.MessageSystem;
+using Assets.Scripts.Upgrade;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Weapons
         private float _timeToAttack = 1f;
         private float _timer;
 
+        public WeaponData WeaponData { get => _weaponData; }
 
         protected void Update()
         {
@@ -48,6 +50,10 @@ namespace Assets.Scripts.Weapons
             MessageSystemManager.instance.PostMessage(damage.ToString(), targetPosition);
         }
 
+        public void Upgrade(UpgradeData upgradeData)
+        {
+            /*weaponStats.Sum(upgradeData.weaponUpgradeStats);*/
+        }
     }
 
 }
