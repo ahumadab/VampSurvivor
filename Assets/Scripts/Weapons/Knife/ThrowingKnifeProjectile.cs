@@ -1,3 +1,4 @@
+using Assets.Scripts.MessageSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.Weapons.Knife
@@ -22,6 +23,12 @@ namespace Assets.Scripts.Weapons.Knife
 
             DealDamageOnHit();
             HandleDestroyOnHit();
+        }
+
+        public void SetData(int damage, int piercingCapacity)
+        {
+            this.damage = damage;
+            this.piercingCapacity += piercingCapacity;
         }
 
         private void HandleDestroyOnHit()
@@ -69,6 +76,7 @@ namespace Assets.Scripts.Weapons.Knife
                 {
                     enemy.TakeDamage(damage);
                     enemiesHit++;
+                    MessageSystemManager.instance.PostMessage(damage.ToString(), enemy.transform.position);
                     break;
                 }
             }

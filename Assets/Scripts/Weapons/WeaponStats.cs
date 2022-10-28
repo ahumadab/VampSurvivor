@@ -9,10 +9,11 @@ namespace Assets.Scripts.Weapons
         public float timeToAttack;
         public int piercingPower;
 
-        public WeaponStats(int damage, float timeToAttack)
+        public WeaponStats(int damage, float timeToAttack, int piercingPower)
         {
             this.damage = damage;
             this.timeToAttack = timeToAttack;
+            this.piercingPower = piercingPower; ; 
         }
 
         public void AddStats(WeaponStats weaponUpgradeStats)

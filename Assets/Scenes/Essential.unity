@@ -567,6 +567,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d56129aa1f4e349428a7836e910feafe, type: 2}
   - {fileID: 11400000, guid: 61c2668ccd2d54d4993f1aeb0f4639b8, type: 2}
   - {fileID: 11400000, guid: b8e6f562d5cb7eb47930fd5f6d386820, type: 2}
+  - {fileID: 11400000, guid: 07cd6324750a3f243876f568a61c7abb, type: 2}
   _weaponManager: {fileID: 167713856}
 --- !u!114 &167713853
 MonoBehaviour:

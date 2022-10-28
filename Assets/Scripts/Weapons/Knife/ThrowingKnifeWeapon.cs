@@ -18,6 +18,7 @@ namespace Assets.Scripts.Weapons.Knife
             if (thrownKnifeProjectile.TryGetComponent<ThrowingKnifeProjectile>(out var throwingKnifeProjectile))
             {
                 throwingKnifeProjectile.SetDirection(_playerMove.lastHorizontalVector, 0f);
+                throwingKnifeProjectile.SetData(weaponStats.damage, weaponStats.piercingPower);
             }
         }
     }

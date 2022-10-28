@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: ThrowingKnife
   m_EditorClassIdentifier: 
   Name: Throwing Knife
-  level: 1
   stats:
     damage: 100
     timeToAttack: 2
     piercingPower: 0
   weaponBasePrefab: {fileID: 1886421922201683051, guid: f9d9170b7bd1750488254cde1dba46f2, type: 3}
   upgrades:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: d7be9c93eb5d1ff43a6072f4b1570360, type: 2}
+  - {fileID: 11400000, guid: 3f95fd921375fb441a1c9f7a6624d7c3, type: 2}
+  - {fileID: 11400000, guid: 4f811b204c239bd4eaeb8e36912947aa, type: 2}

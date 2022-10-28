@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  damage: 10
+  damage: 5
   piercingCapacity: 1
   areaOfEffect: 0.7
 --- !u!114 &1878245979550951788

@@ -8,7 +8,6 @@ namespace Assets.Scripts.Weapons
     {
         private WeaponData _weaponData;
         protected WeaponStats weaponStats;
-        private float _timeToAttack = 1f;
         private float _timer;
 
         public WeaponData WeaponData { get => _weaponData; }
@@ -23,7 +22,7 @@ namespace Assets.Scripts.Weapons
 
         private void ResetCooldown()
         {
-            _timer = _timeToAttack;
+            _timer = weaponStats.timeToAttack;
         }
 
         private void ProcessCooldown()
@@ -39,8 +38,7 @@ namespace Assets.Scripts.Weapons
         public virtual void SetData(WeaponData weaponData)
         {
             _weaponData = weaponData;
-            _timeToAttack = weaponData.stats.timeToAttack;
-            weaponStats = new WeaponStats(weaponData.stats.damage, weaponData.stats.timeToAttack);
+            weaponStats = new WeaponStats(weaponData.stats.damage, weaponData.stats.timeToAttack, weaponData.stats.piercingPower);
         }
 
         public abstract void Attack();
