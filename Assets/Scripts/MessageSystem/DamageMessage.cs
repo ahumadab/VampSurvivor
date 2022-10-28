@@ -14,10 +14,9 @@ namespace Assets.Scripts.MessageSystem
         private void CheckToDisappear()
         {
             _timeToDisappear -= Time.deltaTime;
-            if (_timeToDisappear < 0f)
-            {
-                gameObject.SetActive(false);
-            }
+            if (!(_timeToDisappear < 0f)) return;
+            _timeToDisappear = 1f;
+            gameObject.SetActive(false);
         }
     }
 }
