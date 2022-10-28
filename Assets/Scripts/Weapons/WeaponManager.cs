@@ -30,14 +30,24 @@ namespace Assets.Scripts.Weapons
                 weaponBase.SetData(unlockedWeapon.weaponData);
 
             }
-            _levelManager.AddUpgradesIntoAvailableUpgrades(unlockedWeapon.weaponData.upgrades);
+
+            weaponBase.WeaponData.Init();
+            AddNextUpgradeToUpgradePool(unlockedWeapon.weaponData);
+        }
+
+        private void AddNextUpgradeToUpgradePool(WeaponData unlockedWeapon)
+        {
+            if (unlockedWeapon.TryGetNextUpgrade(out var nextUpgrade))
+            {
+                _levelManager.AddUpgradesIntoAvailableUpgrades(nextUpgrade);
+            }
         }
 
         public void UpgradeWeapon(UpgradeWeapon upgradeData)
         {
             WeaponBase weaponToUpgrade = _weapons.Find((wb) => wb.WeaponData == upgradeData.weaponData);
             weaponToUpgrade.Upgrade(upgradeData);
-
+            AddNextUpgradeToUpgradePool(weaponToUpgrade.WeaponData);
         }
     }
 }

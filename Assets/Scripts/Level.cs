@@ -104,5 +104,10 @@ namespace Assets.Scripts
         {
             _upgradesPool.AddRange(upgradesToAdd);
         }
+
+        public void AddUpgradesIntoAvailableUpgrades(UpgradeWeapon upgradeToAdd)
+        {
+            _upgradesPool.Add(upgradeToAdd);
+        }
     }
 }
