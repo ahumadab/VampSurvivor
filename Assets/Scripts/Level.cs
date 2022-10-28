@@ -72,9 +72,24 @@ namespace Assets.Scripts
             }
             for (int i = 0; i < count; i++)
             {
-                upgradeList.Add(_upgradesPool[Random.Range(0, _upgradesPool.Count)]);
+                AddUniqueRandomPowerUp(upgradeList);
             }
             return upgradeList;
+        }
+
+        private void AddUniqueRandomPowerUp(List<PowerUp> upgradeList)
+        {
+            while (true)
+            {
+                var randomUpgrade = _upgradesPool[Random.Range(0, _upgradesPool.Count)];
+                var iSPowerUpAlreadyIn = upgradeList.Exists((upgrade) => randomUpgrade == upgrade);
+                if (iSPowerUpAlreadyIn)
+                {
+                    continue;
+                }
+                upgradeList.Add(randomUpgrade);
+                break;
+            }
         }
 
         public void Upgrade(int selectedUpgradeId)
@@ -103,6 +118,11 @@ namespace Assets.Scripts
         public void AddUpgradesIntoAvailableUpgrades(List<UpgradeWeapon> upgradesToAdd)
         {
             _upgradesPool.AddRange(upgradesToAdd);
+        }
+
+        public void AddUpgradesIntoAvailableUpgrades(UpgradeWeapon upgradeToAdd)
+        {
+            _upgradesPool.Add(upgradeToAdd);
         }
     }
 }

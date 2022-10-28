@@ -7,5 +7,6 @@ namespace Assets.Scripts.Upgrade
     public class UpgradeWeapon : UpgradeData
     {
         public WeaponStats weaponUpgradeStats;
+        public WeaponData weaponData;
     }
 }
