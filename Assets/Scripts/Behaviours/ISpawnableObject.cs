@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISpawnableObject
+namespace Assets.Scripts.Behaviours
 {
-    public void SpawnObject(Vector3 position);
+    public interface ISpawnableObject
+    {
+        public void SpawnObject(Vector3 position);
+    }
 }

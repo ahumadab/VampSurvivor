@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Behaviours;
 using UnityEngine;
 
-public class CoinPickUp : MonoBehaviour, IPickUpObject
+namespace Assets.Scripts
 {
-    [SerializeField] int coinValue;
-
-    public void OnPickUp(Character character)
+    public class CoinPickUp : MonoBehaviour, IPickUpObject
     {
-        character.coins.AddCoin(coinValue);
-    }
+        [SerializeField] int coinValue;
 
+        public void OnPickUp(Character character)
+        {
+            character.coins.AddCoin(coinValue);
+        }
+
+    }
 }

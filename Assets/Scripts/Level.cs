@@ -1,38 +1,128 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using Assets.Scripts.LevelUpMenu;
+using Assets.Scripts.Upgrade;
+using Assets.Scripts.Weapons;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Level : MonoBehaviour
+namespace Assets.Scripts
 {
-    int level = 1;
-    int experience = 0;
-    [SerializeField] ExperienceBar experienceBar;
-    
-    int TO_LEVEL_UP
+    public class Level : MonoBehaviour
     {
-        get { return level * 1000; }
-    }
+        [SerializeField] ExperienceBar _experienceBar;
+        [SerializeField] LevelUpPanelManager _levelUpPanelManager;
+        [SerializeField] private List<PowerUp> _upgradesPool;
+        [SerializeField] private WeaponManager _weaponManager;
+        private int _level = 1;
+        private int _experience = 0;
+        private List<PowerUp> _selectedUpgradesToPickUp;
+        private List<PowerUp> _acquiredUpgrades;
 
-    private void Start()
-    {
-        experienceBar.UpdateExperienceSlider(experience, TO_LEVEL_UP);
-        experienceBar.SetLevelText(level);
-    }
+        private int ToLevelUp() => _level * 1000;
 
-    public void AddExperience(int amount)
-    {
-        experience += amount;
-        CheckLevelUp();
-        experienceBar.UpdateExperienceSlider(experience, TO_LEVEL_UP);
-    }
-
-    public void CheckLevelUp()
-    {
-        if (experience >= TO_LEVEL_UP)
+        private void Start()
         {
-            experience -= TO_LEVEL_UP;
-            level += 1;
-            experienceBar.SetLevelText(level);
+            _experienceBar.UpdateExperienceSlider(_experience, ToLevelUp());
+            _experienceBar.SetLevelText(_level);
+        }
+
+        public void AddExperience(int amount)
+        {
+            _experience += amount;
+            CheckLevelUp();
+            _experienceBar.UpdateExperienceSlider(_experience, ToLevelUp());
+        }
+
+        public void CheckLevelUp()
+        {
+            if (HasToLevelUp())
+            {
+                LevelUp();
+            }
+        }
+
+        private bool HasToLevelUp()
+        {
+            return _experience >= ToLevelUp();
+        }
+
+        private void LevelUp()
+        {
+            SetRandomUpgradesToPickUp();
+            _levelUpPanelManager.OpenPanel(_selectedUpgradesToPickUp);
+            _experience -= ToLevelUp();
+            _level += 1;
+            _experienceBar.SetLevelText(_level);
+        }
+
+        private void SetRandomUpgradesToPickUp()
+        {
+            _selectedUpgradesToPickUp ??= new List<PowerUp>();
+            _selectedUpgradesToPickUp.Clear();
+            _selectedUpgradesToPickUp.AddRange(GetPowerUps(4));
+        }
+
+        public List<PowerUp> GetPowerUps(int count)
+        {
+            List<PowerUp> upgradeList = new List<PowerUp>();
+            if (count > _upgradesPool.Count)
+            {
+                count = _upgradesPool.Count;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                AddUniqueRandomPowerUp(upgradeList);
+            }
+            return upgradeList;
+        }
+
+        private void AddUniqueRandomPowerUp(List<PowerUp> upgradeList)
+        {
+            while (true)
+            {
+                var randomUpgrade = _upgradesPool[Random.Range(0, _upgradesPool.Count)];
+                var iSPowerUpAlreadyIn = upgradeList.Exists((upgrade) => randomUpgrade == upgrade);
+                if (iSPowerUpAlreadyIn)
+                {
+                    continue;
+                }
+                upgradeList.Add(randomUpgrade);
+                break;
+            }
+        }
+
+        public void Upgrade(int selectedUpgradeId)
+        {
+            PowerUp upgradeData = _selectedUpgradesToPickUp[selectedUpgradeId];
+            _acquiredUpgrades ??= new List<PowerUp>();
+
+            switch (upgradeData)
+            {
+                case UpgradeWeapon upgradeWeapon:
+                    _weaponManager.UpgradeWeapon(upgradeWeapon);
+                    break;
+                case UnlockWeapon unlockWeapon:
+                    _weaponManager.AddWeapon(unlockWeapon);
+                    break;
+                default:
+                    Debug.Log("oui");
+                    break;
+            }
+
+            _acquiredUpgrades.Add(upgradeData);
+            _upgradesPool.Remove(upgradeData);
+        }
+
+
+        public void AddUpgradesIntoAvailableUpgrades(List<UpgradeWeapon> upgradesToAdd)
+        {
+            _upgradesPool.AddRange(upgradesToAdd);
+        }
+
+        public void AddUpgradesIntoAvailableUpgrades(UpgradeWeapon upgradeToAdd)
+        {
+            _upgradesPool.Add(upgradeToAdd);
         }
     }
 }

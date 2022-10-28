@@ -1,47 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMove : MonoBehaviour
+namespace Assets.Scripts
 {
-    Rigidbody2D rigidbody2D;
-    [HideInInspector] public Vector3 movementVector;
-    [SerializeField] float speed = 10f;
-    [HideInInspector] public float lastHorizontalVector;
-    [HideInInspector] public float lastVerticalVector;
-
-    Animate animate;
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class PlayerMove : MonoBehaviour
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        movementVector = new Vector3();
-        animate = GetComponent<Animate>();
-    }
-    void Start()
-    {
-        lastHorizontalVector = -1f;
-        lastVerticalVector = 1f;
-    }
+        Rigidbody2D rigidbody2D;
+        [HideInInspector] public Vector3 movementVector;
+        [SerializeField] float speed = 10f;
+        [HideInInspector] public float lastHorizontalVector;
+        [HideInInspector] public float lastVerticalVector;
 
-    void Update()
-    {
-        movementVector.x = Input.GetAxisRaw("Horizontal");
-        movementVector.y = Input.GetAxisRaw("Vertical");
-        movementVector *= speed;
+        Animate animate;
 
-        if (movementVector.x != 0)
+        private void Awake()
         {
-            lastHorizontalVector = movementVector.x;
+            rigidbody2D = GetComponent<Rigidbody2D>();
+            movementVector = new Vector3();
+            animate = GetComponent<Animate>();
         }
-        if (movementVector.y != 0)
+        void Start()
         {
-            lastVerticalVector = movementVector.y;
+            lastHorizontalVector = -1f;
+            lastVerticalVector = 1f;
         }
 
-        animate.horizontal = movementVector.x;
+        void Update()
+        {
+            movementVector.x = Input.GetAxisRaw("Horizontal");
+            movementVector.y = Input.GetAxisRaw("Vertical");
+            movementVector *= speed;
 
-        rigidbody2D.velocity = movementVector;
+            if (movementVector.x != 0)
+            {
+                lastHorizontalVector = movementVector.x;
+            }
+            if (movementVector.y != 0)
+            {
+                lastVerticalVector = movementVector.y;
+            }
+
+            animate.horizontal = movementVector.x;
+
+            rigidbody2D.velocity = movementVector;
+        }
     }
 }

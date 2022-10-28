@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Animate : MonoBehaviour
+namespace Assets.Scripts
 {
-    Animator animator;
-    public float horizontal;
-
-    private void Awake()
+    public class Animate : MonoBehaviour
     {
-        animator = GetComponentInChildren<Animator>();
-    }
+        Animator animator;
+        public float horizontal;
 
-    private void Update()
-    {
-        animator.SetFloat("Horizontal", horizontal);
+        private void Awake()
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
+
+        private void Update()
+        {
+            animator.SetFloat("Horizontal", horizontal);
+        }
     }
 }

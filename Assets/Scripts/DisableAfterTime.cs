@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DisableAfterTime : MonoBehaviour
+namespace Assets.Scripts
 {
-    float timeToDisable = 0.8f;
-    float timer;
-
-    private void OnEnable()
+    public class DisableAfterTime : MonoBehaviour
     {
-        timer = timeToDisable;
-    }
+        float timeToDisable = 0.2f;
+        float timer;
 
-    private void LateUpdate()
-    {
-        timer -= Time.deltaTime;
-        if (timer < 0f)
+        private void OnEnable()
         {
-            gameObject.SetActive(false);
+            timer = timeToDisable;
+        }
+
+        private void LateUpdate()
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0f)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Coins : MonoBehaviour
+namespace Assets.Scripts
 {
-    public int coinsAcquired;
-    [SerializeField] TMPro.TextMeshProUGUI coinsCountText;
-
-    private void Start()
+    public class Coins : MonoBehaviour
     {
-        coinsCountText.text = "Coins: " + coinsAcquired.ToString();
-    }
+        public int coinsAcquired;
+        [SerializeField] TMPro.TextMeshProUGUI coinsCountText;
 
-    public void AddCoin(int coinsAmount)
-    {
-        coinsAcquired += coinsAmount;
-        coinsCountText.text = "Coins: " + coinsAcquired.ToString();
-    }
+        private void Start()
+        {
+            coinsCountText.text = "Coins: " + coinsAcquired.ToString();
+        }
 
+        public void AddCoin(int coinsAmount)
+        {
+            coinsAcquired += coinsAmount;
+            coinsCountText.text = "Coins: " + coinsAcquired.ToString();
+        }
+
+    }
 }

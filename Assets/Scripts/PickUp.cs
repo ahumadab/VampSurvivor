@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Behaviours;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+namespace Assets.Scripts
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class PickUp : MonoBehaviour
     {
-        Character character = collision.GetComponent<Character>();
-        if (character != null)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            GetComponent<IPickUpObject>().OnPickUp(character);
-            Destroy(gameObject);
+            Character character = collision.GetComponent<Character>();
+            if (character != null)
+            {
+                GetComponent<IPickUpObject>().OnPickUp(character);
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,51 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Assets.Scripts.Behaviours;
 
-public class Health
+namespace Assets.Scripts
 {
-    private int currentHealth;
-    private int maxHealth;
-    private readonly DyingBehaviour target;
-
-    public Health(int currentHealth, int maxHealth, DyingBehaviour target)
+    public class Health
     {
-        this.currentHealth = currentHealth;
-        this.maxHealth = maxHealth;
-        this.target = target;
-    }
+        private int currentHealth;
+        private int maxHealth;
+        private readonly DyingBehaviour target;
 
-    public int CurrentHealth { get { return currentHealth; } }
-
-    public int MaxHealth { get { return maxHealth; } }
-
-    public void TakeDamage(int damageTaken)
-    {
-        currentHealth -= damageTaken;
-        if (IsDead())
+        public Health(int currentHealth, int maxHealth, DyingBehaviour target)
         {
-            target.Die();
+            this.currentHealth = currentHealth;
+            this.maxHealth = maxHealth;
+            this.target = target;
         }
-    }
 
-    public void Heal(int healAmout)
-    {
-        if (!IsDead())
+        public int CurrentHealth { get { return currentHealth; } }
+
+        public int MaxHealth { get { return maxHealth; } }
+
+        public void TakeDamage(int damageTaken)
         {
-            int newHealth = currentHealth + healAmout;
-            if (newHealth > maxHealth)
+            currentHealth -= damageTaken;
+            if (IsDead())
             {
-                currentHealth = maxHealth;
-            }
-            else
-            {
-                currentHealth += newHealth;
+                target.Die();
             }
         }
-    }
 
-    private bool IsDead()
-    {
-        return currentHealth <= 0;
+        public void Heal(int healAmout)
+        {
+            if (!IsDead())
+            {
+                int newHealth = currentHealth + healAmout;
+                if (newHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                else
+                {
+                    currentHealth += newHealth;
+                }
+            }
+        }
+
+        private bool IsDead()
+        {
+            return currentHealth <= 0;
+        }
     }
 }

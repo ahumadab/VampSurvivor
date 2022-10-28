@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Behaviours;
 using UnityEngine;
 
-public class HealPickUpObject : MonoBehaviour, IPickUpObject
+namespace Assets.Scripts
 {
-    [SerializeField] int healAmount;
-    public void OnPickUp(Character character)
+    public class HealPickUpObject : MonoBehaviour, IPickUpObject
     {
-        character.Heal(healAmount);
-    }
+        [SerializeField] int healAmount;
+        public void OnPickUp(Character character)
+        {
+            character.Heal(healAmount);
+        }
 
+    }
 }
