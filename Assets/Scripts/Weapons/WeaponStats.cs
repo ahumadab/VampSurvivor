@@ -15,10 +15,11 @@ namespace Assets.Scripts.Weapons
             this.timeToAttack = timeToAttack;
         }
 
-        public void Sum(WeaponStats weaponUpgradeStats)
+        public void AddStats(WeaponStats weaponUpgradeStats)
         {
             damage += weaponUpgradeStats.damage;
             timeToAttack += weaponUpgradeStats.timeToAttack;
+            piercingPower += weaponUpgradeStats.piercingPower;
         }
     }
 }

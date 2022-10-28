@@ -50,9 +50,9 @@ namespace Assets.Scripts.Weapons
             MessageSystemManager.instance.PostMessage(damage.ToString(), targetPosition);
         }
 
-        public void Upgrade(UpgradeData upgradeData)
+        public void Upgrade(UpgradeWeapon upgradeData)
         {
-            /*weaponStats.Sum(upgradeData.weaponUpgradeStats);*/
+            weaponStats.AddStats(upgradeData.weaponUpgradeStats);
         }
     }
 

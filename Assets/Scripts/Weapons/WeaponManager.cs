@@ -35,8 +35,8 @@ namespace Assets.Scripts.Weapons
 
         public void UpgradeWeapon(UpgradeWeapon upgradeData)
         {
-           /* WeaponBase weaponToUpgrade =  _weapons.Find((wb) => wb.WeaponData == upgradeData.weaponData);
-            weaponToUpgrade.Upgrade(upgradeData);*/
+            WeaponBase weaponToUpgrade = _weapons.Find((wb) => wb.WeaponData == upgradeData.weaponData);
+            weaponToUpgrade.Upgrade(upgradeData);
 
         }
     }

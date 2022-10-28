@@ -19,3 +19,4 @@ MonoBehaviour:
     damage: 0
     timeToAttack: -0.5
     piercingPower: 0
+  weaponData: {fileID: 11400000, guid: 4500e9a6bf1787e4cb04a56478f9336c, type: 2}
